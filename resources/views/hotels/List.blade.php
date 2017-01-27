@@ -32,7 +32,16 @@
                     <td>{{ $h->City->name }}</td>
                     <td>{{ $h->zip_code }}</td>
                     <td>{{ $h->State->name }}</td>
-                    <td>{{ $h->rating }}</td>
+                    <td>
+                        <div class="stars stars-rating">
+                            <select id="example-bootstrap" name="rating{{$h->id}}" class="rating-stars" data-id="{{$h->id}}" data-value="{{$h->rating}}">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div></td>
                     <td>{{ $h->email }}</td>
                     <td>{{ $h->phone }}</td>
 
@@ -54,4 +63,15 @@
   <script src="/js/jquery.barrating.js"></script>
   <script src="/js/barrating.js"></script>
   <script src="/js/jquery.timepicker.min.js"></script>
+    <script type="text/javascript">
+
+        $(".rating-stars").each(function( index ) {
+            $(this).barrating({
+                theme: 'bootstrap-stars',
+                showSelectedRating: false,
+                readonly: true,
+                initialRating: $( this ).attr('data-value')
+            });
+        });
+    </script>
 @endsection
