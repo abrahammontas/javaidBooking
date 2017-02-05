@@ -4,13 +4,15 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<div class="col-lg-4">
           <h2 class="sub-header">Add a new hotel</h2>
-          {!! Form::open(array('url' => 'state')) !!}
+          {!! Form::open(array('url' => 'state', 'data-toggle' => 'validator', 'role' => 'form')) !!}
           	<div class="form-group">
 			    {!! Form::label('Name') !!}
 			    {!! Form::text('name', null,
 			        array('class'=>'form-control',
-			              'placeholder'=>'Madrid')) !!}
-			</div>
+			              'placeholder'=>'Madrid', 'required',
+			              'data-error' =>'Please fill out this field.')) !!}
+				<div class="help-block with-errors"></div>
+		</div>
             <div class="form-group">
                 {!! Form::label('Country') !!}
 				<select name="city_id"> 

@@ -76,9 +76,9 @@ class StateController extends Controller
      */
     public function edit($id)
     {
-        $city = City::all();
+        $cities = City::all();
 
-        return view('states.Edit', ['state' => State::find($id), 'city' => $city]);
+        return view('states.Edit', ['state' => State::find($id), 'cities' => $cities]);
     }
 
     /**
@@ -90,7 +90,7 @@ class StateController extends Controller
      */
     public function update(Staterules $request, $id)
     {
-        $state = State::where('id', '=', $id)->update($request->all());
+        $state = State::where('id', '=', $id)->update($request->except(['_method', '_token']));
 
         if(isset($state)){
             $message = "The state '".$request->input('name')."' has been edited successfully.";

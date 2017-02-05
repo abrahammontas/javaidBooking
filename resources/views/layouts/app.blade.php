@@ -32,6 +32,7 @@
     <script src="/js/app.js"></script>
 
     <script>window.jQuery || document.write('<script src="/js/jquery-3.1.1.min.js"><\/script>')</script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.js"></script>
 
     <!-- Scripts -->
     <script>

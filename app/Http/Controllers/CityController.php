@@ -85,7 +85,7 @@ class CityController extends Controller
      */
     public function update(CityRules $request, $id)
     {
-        $city = City::where('id', '=', $id)->update($request->all());
+        $city = City::where('id', '=', $id)->update($request->except(['_method', '_token']));
 
         if(isset($city)){
             $message = "The city '".$request->input('name')."' has been edited successfully.";

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Hotel;
 use App\City;
 use App\State;
+use App\Photo;
 use App\Http\Requests;
 use Session;
 use App\Http\Requests\Hotelrules;
@@ -45,9 +46,11 @@ class HotelController extends Controller
      */
     public function store(Hotelrules $request)
     {
-        $hotel = Hotel::create($request->all());
+        $hotel = Hotel::create($request->except(['_method', '_token', 'images', 'names', 'descriptions']));
 
         if(isset($hotel->id)){
+            app('App\Http\Controllers\PhotoController')->saveAndUploadImage($request, $hotel);
+
             $message = "The hotel '".$request->input('name')."' has been created successfully.";
             $class = "alert alert-success";
         }
@@ -83,7 +86,10 @@ class HotelController extends Controller
 
         $states = State::where('city_id', '=', $cities[0]->id)->get();
 
-        return view('hotels.Edit', ['hotel' => Hotel::find($id), 'cities' => $cities, 'states' => $states]);
+        $images = Photo::where('hotel_id', '=', $id)->get();
+
+        return view('hotels.Edit', ['hotel' => Hotel::find($id), 'cities' => $cities, 'states' => $states,
+            'images' => $images]);
     }
 
     /**
@@ -133,4 +139,13 @@ class HotelController extends Controller
         return redirect('hotel')->with('message', $message)
             ->with('class', $class);
     }
+
+    public function getImages($id) {
+        $hotel = Hotel::find($id);
+
+        $images = Photo::where('hotel_id', '=', $id)->get();
+
+        return view('hotels.Images', ['hotel' => $hotel, 'images' => $images]);
+    }
+
 }

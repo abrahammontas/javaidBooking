@@ -3,13 +3,16 @@
 @section('content')
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<div class="col-lg-4">
-          <h2 class="sub-header">Edit State ({{$state->name}})</h2>
-          {!! Form::model($state, array('route' => array('state.update', $state->id),'method' => 'put')) !!}
+          <h2 class="sub-header">Edit State '{{$state->name}}'</h2>
+          {!! Form::model($state, array('route' => array('state.update', $state->id),'method' => 'put',
+          'data-toggle' => 'validator', 'role' => 'form')) !!}
 			<div class="form-group">
 				{!! Form::label('Name') !!}
 				{!! Form::text('name', null,
                     array('class'=>'form-control',
-                          'placeholder'=>'Madrid')) !!}
+                          'placeholder'=>'Madrid', 'required',
+			              'data-error' =>'Please fill out this field.')) !!}
+				<div class="help-block with-errors"></div>
 			</div>
 			<div class="form-group">
 				{!! Form::label('Country') !!}

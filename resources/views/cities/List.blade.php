@@ -4,15 +4,18 @@
 
   <div class="col-sm-12 col-md-12 main">
           <h2 class="sub-header">Cities list</h2>
-          <div class='<?php if(isset($class)){echo $class;}?>'>
-            <?php if(isset($message)){echo $message;}?>
+      @if (session('message'))
+          <div class="{{ session('class') }}">
+              {{ session('message') }}
           </div>
-          <div class="table-responsive">
+      @endif
+      <div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Name</th>
+                    <th>Name</th>
+                    <th>Optons</th>
                 </tr>
               </thead>
               <tbody>
@@ -20,6 +23,9 @@
                 <tr>
                   <td>{{ $c->id }}</td>
                   <td>{{ $c->name }}</td>
+                  <td>
+                      <a href="{{url('city/'.$c->id.'/edit')}}" class='btn btn-primary'> Edit </a>
+                  </td>
                 </tr>
                 @endforeach
               </tbody>

@@ -4,9 +4,11 @@
 
   <div class="col-sm-12 col-md-12 main">
           <h2 class="sub-header">States list</h2>
-          <div class='<?php if(isset($class)){echo $class;}?>'>
-            <?php if(isset($message)){echo $message;}?>
+      @if (session('message'))
+          <div class="{{ session('class') }}">
+              {{ session('message') }}
           </div>
+      @endif
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>

@@ -26,6 +26,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('city', 'CityController');
 
     Route::resource('state', 'StateController');
+
+    Route::resource('image', 'PhotoController');
+
+    Route::get('image/create/{id}', ['uses' => 'PhotoController@create']);
+
+    Route::get('hotel/images/{id}', ['uses' => 'HotelController@getImages']);
+
+    Route::post('hotel/images/{id}', ['uses' => 'HotelController@postImages']);
 });
 
 
